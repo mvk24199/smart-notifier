@@ -8,10 +8,25 @@ servers:
   - url: http://localhost:8080
     description: Local dev server
 
+tags:
+  - name: Events
+  - name: Templates
+  - name: Preferences
+
 paths:
   /events:
     post:
+      tags:
+        - Events
       summary: Trigger a notification event
+      description: External Services can emit a new event into the system
+      parameters:
+        - in: query
+          name: dryRun
+          required: false
+          schema:
+            type: boolean
+          description: If true, validates the event but doesn't enqueue it.
       requestBody:
         required: true
         content:
@@ -23,10 +38,17 @@ paths:
           description: Event accepted for processing
         "400":
           description: Invalid event
+        "401":
+          description: Unauthorized
+        "403":
+          description: Forbidden
 
   /templates:
     post:
+      tags:
+        - Templates
       summary: Create a new notification template
+      description: Create a new notification template
       requestBody:
         required: true
         content:
@@ -41,7 +63,10 @@ paths:
 
   /preferences/{userId}:
     get:
+      tags:
+        - Preferences
       summary: Get user preferences
+      description: Get User Preferences
       parameters:
         - in: path
           name: userId
@@ -60,6 +85,8 @@ paths:
 
   /opt-in:
     post:
+      tags:
+        - Preferences
       summary: Update user preferences
       requestBody:
         required: true
@@ -77,6 +104,7 @@ components:
   schemas:
     EventRequest:
       type: object
+      description: Represents an event triggered by an external service
       required:
         - eventType
         - userId
@@ -97,6 +125,7 @@ components:
 
     TemplateRequest:
       type: object
+      description: Template content to render a notification
       required:
         - templateId
         - type
@@ -118,6 +147,7 @@ components:
 
     UserPreferences:
       type: object
+      description: User's active notification subscriptions.
       properties:
         userId:
           type: string
@@ -128,6 +158,7 @@ components:
 
     OptInRequest:
       type: object
+      description: Request to update Event subscriptions.
       required:
         - userId
         - subscribedEvents
