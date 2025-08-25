@@ -1,0 +1,140 @@
+openapi: 3.0.3
+info:
+  title: Smart Notification System API
+  version: 1.0.0
+  description: API for triggering, managing, and delivering notifications.
+
+servers:
+  - url: http://localhost:8080
+    description: Local dev server
+
+paths:
+  /events:
+    post:
+      summary: Trigger a notification event
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/EventRequest"
+      responses:
+        "202":
+          description: Event accepted for processing
+        "400":
+          description: Invalid event
+
+  /templates:
+    post:
+      summary: Create a new notification template
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/TemplateRequest"
+      responses:
+        "201":
+          description: Template created
+        "400":
+          description: Invalid input
+
+  /preferences/{userId}:
+    get:
+      summary: Get user preferences
+      parameters:
+        - in: path
+          name: userId
+          required: true
+          schema:
+            type: string
+      responses:
+        "200":
+          description: User preferences
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/UserPreferences"
+        "404":
+          description: User not found
+
+  /opt-in:
+    post:
+      summary: Update user preferences
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/OptInRequest"
+      responses:
+        "200":
+          description: Preferences updated
+        "400":
+          description: Invalid input
+
+components:
+  schemas:
+    EventRequest:
+      type: object
+      required:
+        - eventType
+        - userId
+        - payload
+      properties:
+        eventType:
+          type: string
+          example: ORDER_PLACED
+        userId:
+          type: string
+          example: user_123
+        payload:
+          type: object
+          description: Event-specific data
+          example:
+            orderId: abc-456
+            amount: 49.99
+
+    TemplateRequest:
+      type: object
+      required:
+        - templateId
+        - type
+        - subject
+        - body
+      properties:
+        templateId:
+          type: string
+          example: order-confirmation
+        type:
+          type: string
+          enum: [EMAIL, SMS, PUSH]
+        subject:
+          type: string
+          example: Your order is confirmed!
+        body:
+          type: string
+          example: Hello {{userName}}, your order {{orderId}} is confirmed.
+
+    UserPreferences:
+      type: object
+      properties:
+        userId:
+          type: string
+        subscribedEvents:
+          type: array
+          items:
+            type: string
+
+    OptInRequest:
+      type: object
+      required:
+        - userId
+        - subscribedEvents
+      properties:
+        userId:
+          type: string
+        subscribedEvents:
+          type: array
+          items:
+            type: string
