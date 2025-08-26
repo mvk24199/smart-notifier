@@ -1,0 +1,11 @@
+com/smartnotifier/model/TemplateRequest$TypeEnum.class
+com/smartnotifier/model/TemplateRequest.class
+com/smartnotifier/model/EventRequest.class
+com/smartnotifier/NotificationServiceApplication.class
+com/smartnotifier/model/UserPreferences.class
+com/smartnotifier/api/ApiUtil.class
+com/smartnotifier/api/EventsApi.class
+com/smartnotifier/api/PreferencesApi.class
+com/smartnotifier/controller/EventsApiController.class
+com/smartnotifier/model/OptInRequest.class
+com/smartnotifier/api/TemplatesApi.class

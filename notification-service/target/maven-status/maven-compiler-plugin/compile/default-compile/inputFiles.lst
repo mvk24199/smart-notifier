@@ -1,0 +1,10 @@
+/Users/vamsi/Projects/smart-notifier/notification-service/src/main/java/com/smartnotifier/api/ApiUtil.java
+/Users/vamsi/Projects/smart-notifier/notification-service/src/main/java/com/smartnotifier/NotificationServiceApplication.java
+/Users/vamsi/Projects/smart-notifier/notification-service/src/main/java/com/smartnotifier/api/TemplatesApi.java
+/Users/vamsi/Projects/smart-notifier/notification-service/src/main/java/com/smartnotifier/api/EventsApi.java
+/Users/vamsi/Projects/smart-notifier/notification-service/src/main/java/com/smartnotifier/api/PreferencesApi.java
+/Users/vamsi/Projects/smart-notifier/notification-service/src/main/java/com/smartnotifier/controller/EventsApiController.java
+/Users/vamsi/Projects/smart-notifier/notification-service/src/main/java/com/smartnotifier/model/OptInRequest.java
+/Users/vamsi/Projects/smart-notifier/notification-service/src/main/java/com/smartnotifier/model/EventRequest.java
+/Users/vamsi/Projects/smart-notifier/notification-service/src/main/java/com/smartnotifier/model/TemplateRequest.java
+/Users/vamsi/Projects/smart-notifier/notification-service/src/main/java/com/smartnotifier/model/UserPreferences.java
